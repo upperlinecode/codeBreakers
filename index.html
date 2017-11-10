@@ -49,8 +49,6 @@
         color: var(--lightpurple);
         background: var(--red);
         text-shadow: 0 0 .5rem black;
-        margin-top: 300px;
-        margin-left: 120px;
       }
 
       body {
@@ -62,7 +60,7 @@
         font-family: 'Arimo', sans-serif;
         position: absolute;
         font-size: 6em;
-        transform: translateX(-2%) translateY(-20%) scaleY(4);
+        transform: translateX(-2%) translateY(-280%) scaleY(4);
       }
 
       #secret {
@@ -72,16 +70,33 @@
         margin-left: 200px;
       }
 
+      .parent {
+        display: flex;
+        margin-top: 300px;
+        margin-left: 120px;
+      }
+
+      .child {
+        flex: 0 1 auto;
+      }
+
       .gross {
         background-color: var(--lightred);
         flex: 0 1 auto;
       }
+
+      .superSecret {
+        color: var(--purple);
+      }
+
     </style>
   </head>
   <body>
     <!-- Morse Code -->
     <h1 id="greeting">CONGRATULATIONS</h1>
-    <button id="playButton">>></button>
+    <div class="parent">
+      <button class="child" id="playButton">>></button><div class="child superSecret">https://raw.githubusercontent.com/upperlinecode/codeBreakers/master/daVinciCodeArray.rb</div>
+    </div>
     <div id="secret"></div>
     <audio src="morsecodeslow.wav"></audio>
   </body>
@@ -90,12 +105,12 @@
     const secretContainer = document.querySelector('#secret')
     const playButton = document.querySelector('#playButton')
     var counter = 0
+    var daVinci = false
 
     // Functions
     function handlePlay() {
         const audio = document.querySelector(`audio`);
         if (!audio) return;
-
         playButton.classList.add('playing');
         audio.currentTime = 0;
         audio.play();
@@ -114,15 +129,16 @@
     playButton.addEventListener('click', handlePlay)
     playButton.addEventListener('transitionend', removeTransition)
 
+    // DaVinci Code
+    const daCode = "https://raw.githubusercontent.com/upperlinecode/codeBreakers/master/daVinciCodeArray.rb"
+
     // Konami Code
     const keyPresses = []
     const secretCode = "cryptography";
     window.addEventListener('keyup', (e) => {
       keyPresses.push(e.key)
       keyPresses.splice(-secretCode.length - 1, keyPresses.length - secretCode.length)
-      console.log(keyPresses)
       if (keyPresses.join("").includes(secretCode)) {
-        console.log("WINNER!")
         secretContainer.innerHTML = "<h3 class='gross'>[72, 101, 114, 101, 32, 105, 115, 32, 121, 111, 117, 114, 32, 102, 105, 110, 97, 108, 32, 99, 111, 100, 101, 58, 32, 49, 50, 53]</h3>"
       }
     })
