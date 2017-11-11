@@ -2,7 +2,7 @@ require_relative 'daVinciCodeArray.rb'
 
 bookarray = book
 
-message = "It is time for a fortune cookie".split(" ")
+message = "It is time for a fortune cookie 9 ensure frescoed Emerging".split(" ")
 
 codes = []
 

@@ -72,6 +72,13 @@
 
       .parent {
         display: flex;
+      }
+
+      .parent-vert {
+        flex-direction: column;
+      }
+
+      .offset{
         margin-top: 300px;
         margin-left: 120px;
       }
@@ -89,13 +96,23 @@
         color: var(--purple);
       }
 
+      input {
+        background-color: black;
+        border: solid 0 black;
+        color: white;
+      }
+
     </style>
   </head>
   <body>
     <!-- Morse Code -->
     <h1 id="greeting">CONGRATULATIONS</h1>
-    <div class="parent">
-      <button class="child" id="playButton">>></button><div class="child superSecret">https://raw.githubusercontent.com/upperlinecode/codeBreakers/master/daVinciCodeArray.rb</div>
+    <div class="parent offset">
+      <button class="child" id="playButton">>></button>
+      <div class="child superSecret parent parent-vert">
+        <p class="child">https://raw.githubusercontent.com/upperlinecode/codeBreakers/master/daVinciCodeArray.rb</p>
+        <input type="text" id="riddle" name="riddle" value="Type riddle answer here">
+      </div>
     </div>
     <div id="secret"></div>
     <audio src="morsecodeslow.wav"></audio>
@@ -104,6 +121,7 @@
     // Elements
     const secretContainer = document.querySelector('#secret')
     const playButton = document.querySelector('#playButton')
+    const riddleBox = document.querySelector('#riddle')
     var counter = 0
     var daVinci = false
 
@@ -120,6 +138,12 @@
         }
     }
 
+    function checkRiddle() {
+      if (riddleBox.value == "chair") {
+        secretContainer.innerHTML = "<h4 class='gross'>5-1-2</h4>"
+      }
+    }
+
     function removeTransition(e) {
       if (e.propertyName !== 'transform') return;
       e.target.classList.remove('playing');
@@ -128,6 +152,7 @@
     // Event Listeners
     playButton.addEventListener('click', handlePlay)
     playButton.addEventListener('transitionend', removeTransition)
+    riddleBox.addEventListener('keyup', checkRiddle)
 
     // DaVinci Code
     const daCode = "https://raw.githubusercontent.com/upperlinecode/codeBreakers/master/daVinciCodeArray.rb"
