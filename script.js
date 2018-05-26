@@ -44,6 +44,6 @@ window.addEventListener('keyup', (e) => {
   keyPresses.push(e.key)
   keyPresses.splice(-secretCode.length - 1, keyPresses.length - secretCode.length)
   if (keyPresses.join("").includes(secretCode)) {
-    secretContainer.innerHTML = "<h3 class='gross'>[72, 101, 114, 101, 32, 105, 115, 32, 121, 111, 117, 114, 32, 102, 105, 110, 97, 108, 32, 99, 111, 100, 101, 58, 32, 100, 99, 111, 100, 101]</h3>"
+    secretContainer.innerHTML = "<h3 class='gross'>[72, 101, 114, 101, 32, 105, 115, 32, 121, 111, 117, 114, 32, 102, 105, 110, 97, 108, 32, 99, 111, 100, 101, 58, 32, 49, 50, 53]</h3>"
   }
 })
